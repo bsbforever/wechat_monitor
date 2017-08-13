@@ -18,3 +18,8 @@ def index(request):
     result=oraclelist.objects.all().order_by('tnsname')
     dic={'result':result}
     return render_to_response('index.html',dic)
+
+def oracle_command(request):
+    result=oraclelist.objects.all().order_by('tnsname')
+    dic={'result':result}
+    return render_to_response('oracle_command.html',dic)
