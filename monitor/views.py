@@ -55,3 +55,63 @@ def commandresult(request):
             #return render_to_response('oracle_command_result1.html',dic)
             html= render_to_string('oracle_command_result_5.html',dic)
             return HttpResponse(html)
+
+    elif command_content=='check_analyzed_time':
+        table_name1=[]
+        try:
+            db = cx_Oracle.connect(username+'/'+password+'@'+ipaddress+':'+port+'/'+tnsname ,mode=cx_Oracle.SYSDBA)
+        except Exception , e:
+            content= (ipaddress+' is Unreachable,The reason is '+ str(e)).strip()
+            return HttpResponse(content)
+        else:
+            table_name  = str(request.GET['sql'])
+            table_name=table_name.split()
+            for i in table_name:
+                table_name1.append('\''+str(i).strip().upper()+'\'')
+            table_name=','.join(table_name1)
+            cursor = db.cursor()
+            row=getanalyzedtime(cursor,table_name)
+            cursor.close()
+            db.close()
+            title='表分析的时间-'+ipaddress+'-'+tnsname
+            tr=['OWNER','TABLE_NAME','NUM_ROWS','SAMPLE_SIZE','LAST_ANALYZED']
+            dic ={'title':title,'tr':tr,'row':row}
+            return render_to_response('oracle_command_result_5.html',dic)
+    elif command_content=='check_segments_size':
+        try:
+            db = cx_Oracle.connect(username+'/'+password+'@'+ipaddress+':'+port+'/'+tnsname ,mode=cx_Oracle.SYSDBA)
+        except Exception , e:
+            content= (ipaddress+' is Unreachable,The reason is '+ str(e)).strip()
+            return HttpResponse(content)
+        else:
+
+            cursor = db.cursor()
+            row=getsegmentssize(cursor)
+            cursor.close()
+            db.close()
+            title='数据库段的大小-'+ipaddress+'-'+tnsname
+            tr=['OWNER','SEGMENTS_NAME','SEGMENTS_TYPE','TABLESPACE_NAME','BYTES/GB']
+            dic ={'title':title,'tr':tr,'row':row}
+            return render_to_response('oracle_command_result_5.html',dic)
+
+    elif command_content=='check_process_text':
+        pid1=[]
+        try:
+            db = cx_Oracle.connect(username+'/'+password+'@'+ipaddress+':'+port+'/'+tnsname ,mode=cx_Oracle.SYSDBA)
+        except Exception , e:
+            content= (ipaddress+' is Unreachable,The reason is '+ str(e)).strip()
+            return HttpResponse(content)
+        else:
+            pid  = str(request.GET['sql'])
+            pid=pid.split()
+            for i in pid:
+                pid1.append('\''+str(i).strip().upper()+'\'')
+            pid=','.join(pid1)
+            cursor = db.cursor()
+            row=getprocesstext(cursor,pid)
+            cursor.close()
+            db.close()
+            title='数据库进程对用的SQL语句-'+ipaddress+'-'+tnsname
+            tr=['SPID','SID','HASH_VALUE','SQL_TEXT','LOGON_TIME','PROGRAM']
+            dic ={'title':title,'tr':tr,'row':row}
+            return render_to_response('oracle_command_result_6.html',dic)
