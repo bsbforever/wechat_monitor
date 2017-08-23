@@ -81,7 +81,7 @@ $(function() {
       <option value ='check_segments_size'>查看数据库段的大小</option>
       <option value ='check_process_text'>查看进程对应的SQL语句</option>
       <option value ='check_session_process'>查看会话对应的进程号</option>
-      <option value ='check_temp_usage'>检查临时文件使用率</option>
+      <option value ='check_temp_usage'>检查临时表空间使用率</option>
       <option value ='check_executions'>检查执行次数等于一的语句</option>
       <option value ='check_unboundsql'>检查未绑定语句</option>
       <option value ='check_session_count'>检查Session数量</option>
@@ -90,7 +90,7 @@ $(function() {
 
 <div id='sqlarea'  class="form-group" hidden>
     <label for="sql22">请输入相关文本</label>
-    <textarea class="form-control" name='sql' id='sql1' rows=1 >多条请用空格分隔</textarea>
+    <textarea class="form-control" name='sql' id='sql1' rows=1 ></textarea>
 </div>
 
 <button type="submit"  class="btn btn-primary" value="OK">确定</button>

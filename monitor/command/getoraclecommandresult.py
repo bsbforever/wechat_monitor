@@ -25,4 +25,34 @@ def getprocesstext(cursor,pid):
     s=cursor.execute(fp1)
     row=s.fetchall()
     return row
+def getprocessno(cursor,sid):
+    fp1='select pro.spid from v$session ses,v$process pro where ses.sid='+sid+' and ses.paddr=pro.addr'
+    s=cursor.execute(fp1)
+    row=s.fetchone()
+    if row is None:
+        return 'None'
+    else:
+        return row[0]
 
+def gettempusage(cursor):
+    fp=open('/home/oracle/mysite/monitor/command/oracle_command/gettempusage.sql','r')
+    fp1=fp.read()
+    s=cursor.execute(fp1)
+    fp.close()
+    row=s.fetchone()
+    return row[0]
+
+def getexecutions(cursor):
+    fp=open('/home/oracle/mysite/monitor/command/oracle_command/getexecutions.sql','r')
+    fp1=fp.read()
+    s=cursor.execute(fp1)
+    fp.close()
+    row=s.fetchall()
+    return row
+def getunboundsql(cursor,unboundsql):
+    fp=open('/home/oracle/mysite/monitor/command/oracle_command/getunboundsql.sql','r')
+    fp1=fp.read().strip()+unboundsql+'%\' order by last_load_time desc'
+    s=cursor.execute(fp1)
+    fp.close()
+    row=s.fetchall()
+    return row
