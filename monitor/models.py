@@ -24,3 +24,20 @@ class oraclelist(models.Model):
         return self.tnsname
     class Meta:
         app_label='monitor'
+
+
+class oraclestatus(models.Model):
+    tnsname=models.CharField(max_length=100)
+    ipaddress=models.GenericIPAddressField()
+    dbsize=models.CharField(max_length=50)
+    tbstatus=models.CharField(max_length=200)
+    host_name=models.CharField(max_length=50,default='host')
+    version=models.CharField(max_length=50,default='10')
+    startup_time=models.CharField(max_length=50,default='2015')
+    archiver=models.CharField(max_length=20,default='opened')
+    sga_size=models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.tnsname
+    class Meta:
+        app_label='monitor'

@@ -180,4 +180,8 @@ def commandresult(request):
             tr=['SQL语句','哈希值','模块','第一次载入时间','上一次载入时间']
             dic ={'title':title,'tr':tr,'row':row}
             return render_to_response('oracle_command_result_5.html',dic)
+def oracle_status(request):
+    result=oraclestatus.objects.all().order_by('tnsname')
+    dic ={'result':result}
+    return render_to_response('oracle_status.html',dic)
 

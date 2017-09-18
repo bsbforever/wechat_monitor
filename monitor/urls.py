@@ -5,5 +5,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^oracle_command/$',views.oracle_command, name='oracle_command'),
     url(r'^commandresult/$',views.commandresult, name='commandresult'),
+    url(r'^oracle_status$',views.oracle_status, name='oracle_status'),
 ]
 

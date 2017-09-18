@@ -60,8 +60,7 @@
           <ul class="nav nav-sidebar">
            {% block overview %} <li> <a href="/monitor/">首页</a></li>{%endblock%}
            {% block admin %} <li> <a target=_blank href="/admin">后台</a></li>{%endblock%}
-           {% block dbstatus1%}<li><a href="#">数据库状态</a></li>{%endblock%}
-           {% block dbstatus2%}<li><a href="#">数据库统计</a></li>{%endblock%}
+           {% block dbstatus%}<li><a href="/monitor/oracle_status">数据库状态</a></li>{%endblock%}
            {% block command %} <li> <a href="/monitor/oracle_command">Oracle命令</a></li> {%endblock%}
           </ul>
           <ul class="nav nav-sidebar">
