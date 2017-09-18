@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'oracle',
         'USER': 'root',
-        'PASSWORD': 'dgvtG@ng6',
+        'PASSWORD': 'abcdABCD1234!@#$',
         'HOST': 'localhost',
         'PORT': '',
         'OPTIONS': {
